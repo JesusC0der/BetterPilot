@@ -28,13 +28,29 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+
     globalShortcut.register('Alt+Shift+C', () => {
+        
         if (win.isVisible()) {
             win.hide();
         } else {
             win.show();
         }
+
     })
+
+    globalShortcut.register('Alt+Shift+D', () => {
+
+        const currentURL = win.webContents.getURL();
+
+        if (currentURL.includes('edgeservices')) {
+            win.loadURL('https://chatgpt.com');
+        } else {
+            win.loadURL('https://edgeservices.bing.com/edgesvc/chat?udsframed=1&form=SHORUN&clientscopes=chat,noheader,udsedgeshop,channelbeta,ntpquery,devtoolsapi,udsinwin11,udsdlpconsent,udscstart,cspgrd,&shellsig=b975e0cc5a474706873839a00fcbbcdabcd6c864&setlang=en-US&darkschemeovr=1&udsps=0&udspp=0')
+        }
+
+    })
+
 }).then(createWindow)
 
 app.on('window-all-closed', () => {
